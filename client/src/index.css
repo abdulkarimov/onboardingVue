@@ -1,0 +1,11 @@
+@import '../node_modules/reset-css/reset.css';
+
+@font-face {
+    font-family: "Ubuntu";
+    src: local("Ubuntu"),
+    url(../assets/fonts/Ubuntu-Light.ttf) format("truetype");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

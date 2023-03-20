@@ -1,0 +1,26 @@
+.ellipse{
+    position: absolute;
+    
+    &-purple {
+        width: 650px;
+        height: 550px;
+
+        background: #C701FC;
+        opacity: 0.2;
+        filter: blur(179.5px);
+        right: 0;
+    }
+
+    &-cyan {
+        width: 370px;
+        height: 550px;
+
+        background: #169DFF;
+        opacity: 0.2;
+        filter: blur(179.5px);
+        top: -8rem;
+        left: -28rem;
+    }
+}
+
+#work:hover + #tooltip { opacity: 1 !important;}

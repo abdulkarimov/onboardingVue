@@ -1,0 +1,10 @@
+@import "../../../styles/colors/Colors.scss";
+
+.block.router-link-active {
+    font-weight: 500;
+    color: white !important;
+    
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: $blue;
+}
