@@ -8,7 +8,7 @@
                     <div class="flex flex-col">
                         <h2 class="mb-2.5 text-5xl font-medium">Артур Далакян</h2>
                         <h4 id="work" class="text-3xl text-blue-dark">Junior UX/UI designer</h4>
-                        <div id="tooltip" class="absolute top-28 z-10 visible opacity-0 inline-block px-5 py-5 text-sm text-black transition-opacity duration-300 bg-white w-96 rounded-3xl shadow-sm opacity-100 tooltip">
+                        <div id="tooltip" class="absolute top-28 z-10 visible opacity-0 inline-block px-5 py-5 text-sm text-black transition-opacity duration-300 bg-white w-96 rounded-3xl shadow-sm">
                             <p class="text-base font-medium">Должностные обязанности</p>
                             <p class="text-base font-medium text-blue-darkest">Junior UX/UI design</p>
                             <p class="text-base">Lorem ipsum dolor sit amet consectetur. Elit purus sit suspendisse arcu tincidunt quis. Erat cursus urna in aenean feugiat faucibus. Aliquam mauris phasellus eget donec aliquam magna tristique. Eleifend netus ipsum faucibus eget.</p>
