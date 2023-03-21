@@ -41,13 +41,13 @@
                     <h2 class="mb-6 text-4xl font-semibold text-whit">Контакты</h2>
                     <ul class="text-white text-2xl font-light">
                         <li class="mb-4">
-                            <a href="#" class="opacity-60 transition hover:opacity-100">+7 (777) 777-77-77</a>
+                            <a href="tel:+77777777777" class="opacity-60 transition hover:opacity-100">+7 (777) 777-77-77</a>
                         </li>
                         <li class="mb-4">
-                            <a href="#" class="opacity-60 transition hover:opacity-100">arturdalakan748@gmail.com</a>
+                            <a href="mailto:arturdalakan748@gmail.com" class="opacity-60 transition hover:opacity-100">arturdalakan748@gmail.com</a>
                         </li>
                         <li class="mb-4">
-                            <a href="#" class="opacity-60 transition hover:opacity-100">@Arthur1703</a>
+                            <a href="https://t.me" class="opacity-60 transition hover:opacity-100">@Arthur1703</a>
                         </li>
                     </ul>
                 </div>

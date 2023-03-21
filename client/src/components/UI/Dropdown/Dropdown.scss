@@ -1,0 +1,50 @@
+.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.overflow-scroll {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+ul {
+    li {
+        div.big-divider {
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 5%;
+                width: 90%;
+                height: 2px;
+                background: #cccccc;
+            }
+        }
+
+        div.medium-divider {
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 9%;
+                width: 81%;
+                height: 2px;
+                background: #cccccc;
+            }
+        }
+
+        div.extrabig {
+            
+        }
+    }
+    
+    li:last-child {
+        div::before {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,66 @@
+@import "../../styles/colors/Colors.scss";
+
+.ellipse{
+    position: absolute;
+
+    &-purple {
+        width: 650px;
+        height: 550px;
+
+        background: #C701FC;
+        opacity: 0.2;
+        filter: blur(249.5px);
+        top: 14rem;
+        right: -44rem;
+    }
+
+    &-cyan {
+        width: 370px;
+        height: 550px;
+
+        background: #169DFF;
+        opacity: 0.2;
+        filter: blur(249.5px);
+        top: -8rem;
+        left: -28rem;
+    }
+}
+
+.scroll-none {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        display: none;
+    }
+}
+
+.empty-area {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 87.75%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 300 !important;
+}
+
+.activeTime {
+    opacity: 1;
+    background-color: white;
+    color: $bg-main-color;
+    font-weight: 500;
+}
+
+.filled {
+    color: #fff !important;
+    font-weight: 400 !important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="container flex flex-col items-start mx-auto px-2 sm:px-4 p-12 max-w-[1050px]">
+        <div class="container flex flex-col items-start mx-auto px-2 sm:px-4 p-12 max-w-[1060px]">
             <div class="relative w-full">
                 <div class="ellipse ellipse-cyan"></div>
                 <div class="flex items-center gap-16 pb-16">
@@ -34,10 +34,10 @@
                         </div>
                     </div>
                 </div>
-                <button class="w-full flex justify-center items-center text-2xl bg-blue-dark hover:bg-blue-darker rounded-full py-4 mb-12 mx-auto">
+                <router-link to="/personal-info-edit" class="w-full flex justify-center items-center text-2xl bg-blue-dark hover:bg-blue-darker rounded-full py-4 mb-12 mx-auto">
                     <img class="w-6 h-6 mr-5" src="../../assets/images/pen.svg" alt="user photo">
                     Редактировать профиль
-                </button>
+                </router-link>
                 <div class="flex justify-between mb-5 w-full">
                     <span class="text-xl font-light text-gray-300">Новичок</span>
                     <span class="text-xl font-light text-gray-300">Профессионал</span>
@@ -63,19 +63,19 @@
                     <h1 class="text-[34px] mb-3">Soft Skills</h1>
                     <div class="pb-2">
                         <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Креативность</span>
-                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mr-3 mb-2">Любознательность</span>
-                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mr-3 mb-2">Коммуникабельность</span>
+                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Любознательность</span>
+                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Коммуникабельность</span>
                     </div>
                 </div>
                 <div class="mb-9 relative z-10">
                     <h1 class="text-[34px] mb-2">Hard skills</h1>
                     <div class="pb-2">
                         <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Типографика</span>
-                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mr-3 mb-2">Figma</span>
-                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mr-3 mb-2">Adobe PhotoShop</span>
+                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Figma</span>
+                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Adobe PhotoShop</span>
                         <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">UX анализ</span>
-                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mr-3 mb-2">Agile</span>
-                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mr-3 mb-2">Коммуникационный дизайн</span>
+                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Agile</span>
+                        <span class="text-[18px] inline-block bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-2">Коммуникационный дизайн</span>
                     </div>
                 </div>
                 <div class="mb-9 relative z-10">
