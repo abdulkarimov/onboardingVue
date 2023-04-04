@@ -3,6 +3,19 @@ import Vuex from 'vuex'
 
 import imageData from './assets/images/demo_avatar2.svg';
 
+import iHub from './assets/images/iHub_logo2.svg';
+import kupipolis from './assets/images/kupipolis.svg';
+import sosmed from './assets/images/sos_medical_assistance.svg';
+import komesk from './assets/images/centras_komesk.svg';
+import mycent from './assets/images/mycent_logo.svg';
+
+import iHubWave from './assets/images/blue_wave.png';
+import kupipolisWave from './assets/images/kupipolis_wave.png';
+import sosmedWave from './assets/images/sosmed_wave.png';
+import kommeskWave from './assets/images/kommesk_wave.png';
+import mycentWave from './assets/images/mycent_wave.png';
+
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -28,7 +41,39 @@ const store = new Vuex.Store({
                 telegram: '@forexample123',
                 phone: '+7 (777) 777-77-77'
             }
-        }
+        },
+        projects: [
+            {
+                logoUrl: iHub,
+                text: 'Lorem ipsum dolor sit amet consectetur. Arcu vulputate dignissim a tellus tincidunt porttitor mi sagittis. Adipiscing gravida nisl morbi tempor arcu neque enim.',
+                subdivision: 'Centras iHub',
+                wave: iHubWave
+            },
+            {
+                logoUrl: kupipolis,
+                text: 'Lorem ipsum dolor sit amet consectetur. Arcu vulputate dignissim a tellus tincidunt porttitor mi sagittis. Adipiscing gravida nisl morbi tempor arcu neque enim.',
+                subdivision: 'Kupipolis',
+                wave: kupipolisWave
+            },
+            {
+                logoUrl: sosmed,
+                text: 'Lorem ipsum dolor sit amet consectetur. Arcu vulputate dignissim a tellus tincidunt porttitor mi sagittis. Adipiscing gravida nisl morbi tempor arcu neque enim.',
+                subdivision: 'Sosmed',
+                wave: sosmedWave
+            },
+            {
+                logoUrl: komesk,
+                text: 'Lorem ipsum dolor sit amet consectetur. Arcu vulputate dignissim a tellus tincidunt porttitor mi sagittis. Adipiscing gravida nisl morbi tempor arcu neque enim.',
+                subdivision: 'Centras kommesk',
+                wave: kommeskWave
+            },
+            {
+                logoUrl: mycent,
+                text: 'Lorem ipsum dolor sit amet consectetur. Arcu vulputate dignissim a tellus tincidunt porttitor mi sagittis. Adipiscing gravida nisl morbi tempor arcu neque enim.',
+                subdivision: 'Mycent',
+                wave: mycentWave
+            }
+        ]
     }
 });
 

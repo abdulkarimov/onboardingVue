@@ -1,5 +1,5 @@
 <template>
-    <nav class="px-2 sm:px-4 py-4 rounded">
+    <nav class="px-4 py-4 relative z-20">
         <div class="container max-w-4 flex flex-wrap items-center justify-between mx-auto pr-8">
             <a href="https://www.cic.kz/" target="_blank" class="flex items-center">
                 <img src="../../../assets/images/iHub_logo.svg" class="h-[5.5rem] mr-3" alt="iHub logo" />
