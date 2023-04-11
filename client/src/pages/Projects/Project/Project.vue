@@ -8,7 +8,7 @@
                 </div>
             </div>
         </div>
-        <img src="../../../assets/images/project_wave.png" alt="project wave" class="h-44 w-full mt-[-1.5rem]"> 
+        <img src="../../../assets/images/project_wave.png" alt="project wave" class="h-44 w-full mt-[-1.5rem] relative"> 
         <div class="container mx-auto px-5 pt-10">
             <div class="w-full">
                 <h1 class="text-5xl font-medium mb-14">О проекте</h1>

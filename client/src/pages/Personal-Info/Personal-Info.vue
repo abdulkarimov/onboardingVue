@@ -127,18 +127,18 @@
             <div class="mb-14 relative z-10 w-full">
                 <h1 class="text-[28px] mb-5">Полезные файлы</h1>
                 <div class="grid grid-cols-2 gap-6">
-                    <div class="flex items-center justify-center h-8 py-14 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500">Презентация OnBoarding</div>
-                    <div class="flex items-center justify-center h-8 py-14 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500">Дорожная карта новичка</div>
+                    <div class="flex items-center justify-center h-8 py-14 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white">Презентация OnBoarding</div>
+                    <div class="flex items-center justify-center h-8 py-14 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white">Дорожная карта новичка</div>
                 </div>
             </div>
             <div class="mb-16 relative z-10 w-full">
                 <h1 class="text-[28px] mb-3">Анкеты</h1>
                 <div class="grid grid-cols-2 gap-6">
-                    <div class="flex items-center flex-col py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 opacity-50">
+                    <div class="flex items-center flex-col py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white opacity-50">
                         <P class="text-2xl font-normal">Анкета 1</P>
                         <p class="text-xl font-normal pb-2 opacity-40">Будет доступно через 2 недели</p>
                     </div>
-                    <div class="flex items-center flex-col py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 opacity-50">
+                    <div class="flex items-center flex-col py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white opacity-50">
                         <P class="text-2xl font-normal">Анкета 2</P>
                         <p class="text-xl font-normal pb-2 opacity-40">Будет доступно через 3 месяца</p>
                     </div>
@@ -148,37 +148,37 @@
                 <h1 class="text-[28px] mb-8">Какие доступы нужно получить?</h1>
                 <div class="grid grid-cols-6 gap-5">
                     <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 w-full">
+                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
                             <img class="w-12 h-12" src="../../assets/images/outlook.svg" alt="outlook">
                         </div>
                         <p class="text-center mt-3 text-base">Электронная почта Outlook</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 w-full">
+                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
                             <img class="w-[7.5rem] h-[7.5rem]" src="../../assets/images/mycent.kz.svg" alt="outlook">
                         </div>
                         <p class="text-center mt-3 text-base">Корпоративный портал</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 w-full">
+                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
                             <img class="w-[4rem] h-[4rem]" src="../../assets/images/wechat.svg" alt="outlook">
                         </div>
                         <p class="text-center mt-3 text-base">Общение с коллегами WeChat</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 w-full">
+                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
                             <img class="w-[4.5rem] h-[4.5rem]" src="../../assets/images/kias.svg" alt="outlook">
                         </div>
                         <p class="text-center mt-3 text-base">Все процессы компании</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 w-full">
+                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
                             <img class="w-12 h-12" src="../../assets/images/telega.svg" alt="outlook">
                         </div>
                         <p class="text-center mt-3 text-base">Чат-бот в Telegram</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white-500 w-full">
+                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
                             <img class="w-12 h-12" src="../../assets/images/whatsapp.svg" alt="outlook">
                         </div>
                         <p class="text-center mt-3 text-base">Группа в WhatsApp</p>
