@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     data() {
         return {
@@ -44,6 +46,9 @@ export default {
     },
     created() {
         this.projects = this.$store.state.projects;
+
+        axios.get('http://127.0.0.1:3000/api/project/get')
+            .then(data => console.log(data))
     }
 }
 </script>
