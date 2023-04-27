@@ -1,309 +1,313 @@
 <template>
-    <div class="mb-32 overflow-hidden">
-        <div class="container flex flex-col items-start mx-auto px-2 p-12 max-w-4xl">
-            <div class="relative w-full">
-                <div class="ellipse ellipse-cyan"></div>
-                <div class="flex items-center justify-center mb-12">
-                    <div class="relative">
-                        <div class="absolute right-0 shadow drop-shadow-xl flex items-center justify-center p-3 w-12 h-12 rounded-full bg-white cursor-pointer">
-                            <img class="w-12 h-12 rounded-full" src="../../assets/images/plus.svg" alt="plus">
-                            <input @input="e => changeProfileImage(e)" type="file" id="fileInput" class="absolute w-full h-full opacity-0 rounded-full">
+    <div>
+        <Navbar></Navbar>
+        <div class="mb-32 overflow-hidden">
+            <div class="container flex flex-col items-start mx-auto px-2 p-12 max-w-4xl">
+                <div class="relative w-full">
+                    <div class="ellipse ellipse-cyan"></div>
+                    <div class="flex items-center justify-center mb-12">
+                        <div class="relative">
+                            <div class="absolute right-0 shadow drop-shadow-xl flex items-center justify-center p-3 w-12 h-12 rounded-full bg-white cursor-pointer">
+                                <img class="w-12 h-12 rounded-full" src="../../assets/images/plus.svg" alt="plus">
+                                <input @input="e => changeProfileImage(e)" type="file" id="fileInput" class="absolute w-full h-full opacity-0 rounded-full">
+                            </div>
+                            <img class="w-56 h-56 rounded-full" :src="userForm.profile_image ? userForm.profile_image : imageData" alt="user photo">
                         </div>
-                        <img class="w-56 h-56 rounded-full" :src="userForm.profile_image ? userForm.profile_image : imageData" alt="user photo">
                     </div>
-                </div>
-                <div class="mb-9">
-                    <h1 class="text-2xl mb-5">Личная информация</h1>
-                    <form class="relative" @submit="e => submitHandler(e)">
-                        <div class="ellipse ellipse-purple"></div>
-                        <div class="grid gap-6 gap-x-8 mb-8 grid-cols-2">
-                            <div>
-                                <input @input="v$.userForm.name.$touch" v-model="userForm.name" type="text" id="name" class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" autocomplete="off" placeholder="Имя">
-                                <p v-if="!v$.userForm.name.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Заполните ваше имя</p>
-                            </div>
-                            <div>
-                                <input @input="v$.userForm.surname.$touch" v-model="userForm.surname" type="text" id="surname" class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" autocomplete="off" placeholder="Фамилия">
-                                <p v-if="!v$.userForm.surname.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Заполните вашу фамилию</p>
-                            </div>
-                            <div class="relative">
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-                                        <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                    </div>
-                                    <input 
-                                        @keypress="workHandler" 
-                                        @focus="userForm.dropDownState.isWork = true"
-                                        @blur="blurHandler('work')"
-                                        v-model="userForm.work" 
-                                        type="text" 
-                                        autocomplete="off" 
-                                        id="work" 
-                                        ref="work"
-                                        class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" 
-                                        placeholder="Должность"
-                                    >
+                    <div class="mb-9">
+                        <h1 class="text-2xl mb-5">Личная информация</h1>
+                        <form class="relative" @submit="e => submitHandler(e)">
+                            <div class="ellipse ellipse-purple"></div>
+                            <div class="grid gap-6 gap-x-8 mb-8 grid-cols-2">
+                                <div>
+                                    <input @input="v$.userForm.name.$touch" v-model="userForm.name" type="text" id="name" class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" autocomplete="off" placeholder="Имя">
+                                    <p v-if="!v$.userForm.name.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Заполните ваше имя</p>
                                 </div>
-                                <Dropdown 
-                                    :items="workPrompt"
-                                    :isActive="userForm.dropDownState.isWork"
-                                    :height="'max-h-fit'"
-                                    :fontSize="'text-xl'"
-                                    category="work"
-                                    @itemHandler="handleItemChanged"
-                                    v-if="workPrompt.length"
-                                />
-                                <p v-if="!v$.userForm.work.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите свою специальность</p>
-                            </div>  
-                            <div class="relative"> 
-                                <div class="relative">
-                                    <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-                                        <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                    </div>
-                                    <input 
-                                        @keypress="levelHandler" 
-                                        @focus="userForm.dropDownState.isLevel = true"
-                                        @blur="blurHandler('level')"
-                                        v-model="userForm.level" 
-                                        type="text" 
-                                        autocomplete="off" 
-                                        id="level" 
-                                        ref="level"
-                                        class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" 
-                                        placeholder="Грейд"
-                                    >
+                                <div>
+                                    <input @input="v$.userForm.surname.$touch" v-model="userForm.surname" type="text" id="surname" class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" autocomplete="off" placeholder="Фамилия">
+                                    <p v-if="!v$.userForm.surname.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Заполните вашу фамилию</p>
                                 </div>
-                                <Dropdown 
-                                    :items="levelPrompt"
-                                    :isActive="userForm.dropDownState.isLevel"
-                                    :height="'max-h-fit'"
-                                    :fontSize="'text-xl'"
-                                    category="level"
-                                    @itemHandler="handleItemChanged"
-                                    v-if="levelPrompt.length"
-                                />
-                                <p v-if="!v$.userForm.level.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите свой уровень</p>
-                            </div> 
-                        </div>
-                        <div class="grid grid-cols-2 gap-6 gap-x-8 mb-8 relative z-30">
-                            <div class="h-16">
-                                <h1 class="text-2xl mb-5">Дата Рождения</h1>
-                                <div class="flex items-baseline gap-4">
-                                    <div>
-                                        <input v-model="userForm.date_of_birth.day" type="number" id="date_of_birth" class="text-white text-center font-normal placeholder:font-light bg-transparent border text-xl rounded-3xl outline-none block w-full px-4 py-4" autocomplete="off" placeholder="День">
+                                <div class="relative">
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                                            <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                        </div>
+                                        <input 
+                                            @keypress="workHandler" 
+                                            @focus="userForm.dropDownState.isWork = true"
+                                            @blur="blurHandler('work')"
+                                            v-model="userForm.work" 
+                                            type="text" 
+                                            autocomplete="off" 
+                                            id="work" 
+                                            ref="work"
+                                            class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" 
+                                            placeholder="Должность"
+                                        >
                                     </div>
-                                    <div class="relative w-[44rem]"> 
-                                        <div class="relative">
-                                            <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-                                                <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    <Dropdown 
+                                        :items="workPrompt"
+                                        :isActive="userForm.dropDownState.isWork"
+                                        :height="'max-h-fit'"
+                                        :fontSize="'text-xl'"
+                                        category="work"
+                                        @itemHandler="handleItemChanged"
+                                        v-if="workPrompt.length"
+                                    />
+                                    <p v-if="!v$.userForm.work.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите свою специальность</p>
+                                </div>  
+                                <div class="relative"> 
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                                            <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                        </div>
+                                        <input 
+                                            @keypress="levelHandler" 
+                                            @focus="userForm.dropDownState.isLevel = true"
+                                            @blur="blurHandler('level')"
+                                            v-model="userForm.level" 
+                                            type="text" 
+                                            autocomplete="off" 
+                                            id="level" 
+                                            ref="level"
+                                            class="text-white font-normal placeholder:font-light bg-transparent border text-2xl rounded-3xl outline-none block w-full px-6 py-4" 
+                                            placeholder="Грейд"
+                                        >
+                                    </div>
+                                    <Dropdown 
+                                        :items="levelPrompt"
+                                        :isActive="userForm.dropDownState.isLevel"
+                                        :height="'max-h-fit'"
+                                        :fontSize="'text-xl'"
+                                        category="level"
+                                        @itemHandler="handleItemChanged"
+                                        v-if="levelPrompt.length"
+                                    />
+                                    <p v-if="!v$.userForm.level.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите свой уровень</p>
+                                </div> 
+                            </div>
+                            <div class="grid grid-cols-2 gap-6 gap-x-8 mb-8 relative z-30">
+                                <div class="h-16">
+                                    <h1 class="text-2xl mb-5">Дата Рождения</h1>
+                                    <div class="flex items-baseline gap-4">
+                                        <div>
+                                            <input v-model="userForm.date_of_birth.day" type="number" id="date_of_birth" class="text-white text-center font-normal placeholder:font-light bg-transparent border text-xl rounded-3xl outline-none block w-full px-4 py-4" autocomplete="off" placeholder="День">
+                                        </div>
+                                        <div class="relative w-[44rem]"> 
+                                            <div class="relative">
+                                                <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                                                    <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                </div>
+                                                <input 
+                                                    @keypress="monthHandler" 
+                                                    @focus="userForm.dropDownState.isMonth = true"
+                                                    @blur="blurHandler('month')"
+                                                    v-model="userForm.date_of_birth.month" 
+                                                    type="text" 
+                                                    autocomplete="off" 
+                                                    id="month" 
+                                                    ref="month"
+                                                    class="text-white font-normal placeholder:font-light bg-transparent border text-xl rounded-3xl outline-none block w-full px-6 py-4" 
+                                                    placeholder="Месяц"
+                                                >
                                             </div>
-                                            <input 
-                                                @keypress="monthHandler" 
-                                                @focus="userForm.dropDownState.isMonth = true"
-                                                @blur="blurHandler('month')"
-                                                v-model="userForm.date_of_birth.month" 
-                                                type="text" 
-                                                autocomplete="off" 
-                                                id="month" 
-                                                ref="month"
-                                                class="text-white font-normal placeholder:font-light bg-transparent border text-xl rounded-3xl outline-none block w-full px-6 py-4" 
-                                                placeholder="Месяц"
-                                            >
+                                            <Dropdown 
+                                                :items="monthPrompt"
+                                                :isActive="userForm.dropDownState.isMonth"
+                                                :height="'max-h-60'"
+                                                :fontSize="'text-xl'"
+                                                category="month"
+                                                @itemHandler="handleItemChanged"
+                                                v-if="monthPrompt.length"
+                                            />
+                                            </div> 
+                                        <div>
+                                        <input v-model="userForm.date_of_birth.year" type="number" id="month" class="text-white text-center font-normal placeholder:font-light bg-transparent border text-xl rounded-3xl outline-none block w-24 px-4 py-4" autocomplete="off" placeholder="Год">
                                         </div>
-                                        <Dropdown 
-                                            :items="monthPrompt"
-                                            :isActive="userForm.dropDownState.isMonth"
-                                            :height="'max-h-60'"
-                                            :fontSize="'text-xl'"
-                                            category="month"
-                                            @itemHandler="handleItemChanged"
-                                            v-if="monthPrompt.length"
-                                        />
-                                        </div> 
-                                    <div>
-                                    <input v-model="userForm.date_of_birth.year" type="number" id="month" class="text-white text-center font-normal placeholder:font-light bg-transparent border text-xl rounded-3xl outline-none block w-24 px-4 py-4" autocomplete="off" placeholder="Год">
+                                    </div>
+                                    <p v-if="(!v$.userForm.date_of_birth.day.$model.length || !v$.userForm.date_of_birth.month.$model.length || !v$.userForm.date_of_birth.year.$model.length) && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите дату рождения</p>
+                                </div>
+                                <div>
+                                    <h1 class="text-2xl mb-5">График работы</h1>
+                                    <div class="grid grid-cols-3 gap-4 h-16">
+                                        <div class="flex items-center justify-between text-white bg-transparent border border-solid border-white text-xs rounded-[15px] outline-none w-full px-5 py-5 opacity-60 cursor-pointer" :class="{'activeTime' : userForm.employmentTime === 'с 8:00 до 17:00'}" @click="userForm.employmentTime = 'с 8:00 до 17:00'">с 8:00 до 17:00</div>
+                                        <div class="flex items-center justify-between text-white bg-transparent border border-solid border-white text-xs rounded-[15px] outline-none w-full px-5 py-5 opacity-60 cursor-pointer" :class="{'activeTime' : userForm.employmentTime === 'с 9:00 до 18:00'}" @click="userForm.employmentTime = 'с 9:00 до 18:00'">с 9:00 до 18:00</div>
+                                        <div class="flex items-center justify-between text-white bg-transparent border border-solid border-white text-xs rounded-[15px] outline-none w-full px-5 py-5 opacity-60 cursor-pointer" :class="{'activeTime' : userForm.employmentTime === 'с 10:00 до 19:00'}" @click="userForm.employmentTime = 'с 10:00 до 19:00'">с 10:00 до 19:00</div>
+                                    </div>
+                                    <p v-if="v$.userForm.employmentTime.$invalid && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите график работы</p>
+                                </div>
+                            </div>
+                            <div class="mb-8">
+                                <h1 class="text-2xl mb-5">Обо мне</h1>
+                                <div>
+                                    <textarea 
+                                        v-model="userForm.personality" 
+                                        type="text" 
+                                        id="personality"
+                                        class="scroll-none text-white font-base bg-transparent border text-2xl rounded-3xl outline-none resize-none block w-full h-48 px-6 pb-16 py-4" 
+                                        :class="{'empty-area' : !userForm.personality.length}" 
+                                        style="min-height: 200px;"
+                                        @input="v$.userForm.personality.$touch"
+                                        @keydown="flexibleScroll"
+                                        autocomplete="off" 
+                                        placeholder="Lorem ipsum dolor sit amet consectetur. Vestibulum ut mauris turpis sit sed semper. Pellentesque auctor massa diam a arcu in eu eget tincidunt. Eu ultrices arcu eget aenean quam vel felis non blandit. Ornare nunc morbi magna morbi dolor." 
+                                    >
+                                    </textarea>
+                                    <p v-if="!v$.userForm.personality.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Заполните информацию о себе</p>
+                                </div>
+                                <p v-if="v$.userForm.personality.$invalid && v$.userForm.personality.$anyDirty && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Расскажите немного о себе</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-6 gap-x-8 mb-8">
+                                <div>
+                                    <h1 class="text-2xl mb-5">Soft Skills</h1>
+                                        <div class="relative"> 
+                                            <div class="relative">
+                                                <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                                                    <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                                </div>
+                                                <input 
+                                                    @keypress="softSkillHandler" 
+                                                    @focus="userForm.dropDownState.isSoftSkills = true"
+                                                    @blur="blurHandler('soft')"
+                                                    v-model="userForm.softSkill" 
+                                                    type="text" 
+                                                    autocomplete="off" 
+                                                    id="softSkill" 
+                                                    ref="softSkill"
+                                                    class="flex items-center justify-between pr-20 text-white bg-transparent border border-solid border-white text-xl rounded-3xl outline-none w-full px-6 py-4 cursor-pointer" 
+                                                    placeholder="Soft skill"
+                                                >
+                                            </div>
+                                            <Dropdown 
+                                                :items="softSkillsPrompt"
+                                                :isActive="userForm.dropDownState.isSoftSkills"
+                                                :height="'max-h-fit'"
+                                                :fontSize="'text-xl'"
+                                                category="softSkills"
+                                                @itemHandler="handleItemChanged"
+                                                v-if="softSkillsPrompt.length"
+                                            />
+                                            </div> 
+                                            <p v-if="!v$.userForm.softSkills.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Выберите ваши софт скиллы</p>
+                                            <div :class="[{'mt-8' : userForm.softSkills.length}, 'flex flex-wrap']">
+                                                <span 
+                                                    v-for="(item, idx) in userForm.softSkills" :key="idx" 
+                                                    class="text-[18px] w-fit flex items-center justify-between bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-5 hover:bg-gray-100"
+                                                >
+                                                    {{ item }} <svg aria-hidden="true" @click="delSoftSkill(idx)" class="w-6 h-6 ml-4 mt-1 cursor-pointer" fill="#5282E7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></span>
+                                            </div>
+                                        <div>
                                     </div>
                                 </div>
-                                <p v-if="(!v$.userForm.date_of_birth.day.$model.length || !v$.userForm.date_of_birth.month.$model.length || !v$.userForm.date_of_birth.year.$model.length) && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите дату рождения</p>
-                            </div>
-                            <div>
-                                <h1 class="text-2xl mb-5">График работы</h1>
-                                <div class="grid grid-cols-3 gap-4 h-16">
-                                    <div class="flex items-center justify-between text-white bg-transparent border border-solid border-white text-xs rounded-[15px] outline-none w-full px-5 py-5 opacity-60 cursor-pointer" :class="{'activeTime' : userForm.employmentTime === 'с 8:00 до 17:00'}" @click="userForm.employmentTime = 'с 8:00 до 17:00'">с 8:00 до 17:00</div>
-                                    <div class="flex items-center justify-between text-white bg-transparent border border-solid border-white text-xs rounded-[15px] outline-none w-full px-5 py-5 opacity-60 cursor-pointer" :class="{'activeTime' : userForm.employmentTime === 'с 9:00 до 18:00'}" @click="userForm.employmentTime = 'с 9:00 до 18:00'">с 9:00 до 18:00</div>
-                                    <div class="flex items-center justify-between text-white bg-transparent border border-solid border-white text-xs rounded-[15px] outline-none w-full px-5 py-5 opacity-60 cursor-pointer" :class="{'activeTime' : userForm.employmentTime === 'с 10:00 до 19:00'}" @click="userForm.employmentTime = 'с 10:00 до 19:00'">с 10:00 до 19:00</div>
-                                </div>
-                                <p v-if="v$.userForm.employmentTime.$invalid && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите график работы</p>
-                            </div>
-                        </div>
-                        <div class="mb-8">
-                            <h1 class="text-2xl mb-5">Обо мне</h1>
-                            <div>
-                                <textarea 
-                                    v-model="userForm.personality" 
-                                    type="text" 
-                                    id="personality"
-                                    class="scroll-none text-white font-base bg-transparent border text-2xl rounded-3xl outline-none resize-none block w-full h-48 px-6 pb-16 py-4" 
-                                    :class="{'empty-area' : !userForm.personality.length}" 
-                                    style="min-height: 200px;"
-                                    @input="v$.userForm.personality.$touch"
-                                    @keydown="flexibleScroll"
-                                    autocomplete="off" 
-                                    placeholder="Lorem ipsum dolor sit amet consectetur. Vestibulum ut mauris turpis sit sed semper. Pellentesque auctor massa diam a arcu in eu eget tincidunt. Eu ultrices arcu eget aenean quam vel felis non blandit. Ornare nunc morbi magna morbi dolor." 
-                                >
-                                </textarea>
-                                <p v-if="!v$.userForm.personality.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Заполните информацию о себе</p>
-                            </div>
-                            <p v-if="v$.userForm.personality.$invalid && v$.userForm.personality.$anyDirty && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Расскажите немного о себе</p>
-                        </div>
-                        <div class="grid grid-cols-2 gap-6 gap-x-8 mb-8">
-                            <div>
-                                <h1 class="text-2xl mb-5">Soft Skills</h1>
-                                    <div class="relative"> 
-                                        <div class="relative">
-                                            <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-                                                <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                            </div>
-                                            <input 
-                                                @keypress="softSkillHandler" 
-                                                @focus="userForm.dropDownState.isSoftSkills = true"
-                                                @blur="blurHandler('soft')"
-                                                v-model="userForm.softSkill" 
-                                                type="text" 
-                                                autocomplete="off" 
-                                                id="softSkill" 
-                                                ref="softSkill"
-                                                class="flex items-center justify-between pr-20 text-white bg-transparent border border-solid border-white text-xl rounded-3xl outline-none w-full px-6 py-4 cursor-pointer" 
-                                                placeholder="Soft skill"
-                                            >
+                                <div class="relative">
+                                    <h1 class="text-2xl mb-5">Hard skills</h1>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                                            <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                         </div>
-                                        <Dropdown 
-                                            :items="softSkillsPrompt"
-                                            :isActive="userForm.dropDownState.isSoftSkills"
-                                            :height="'max-h-fit'"
-                                            :fontSize="'text-xl'"
-                                            category="softSkills"
-                                            @itemHandler="handleItemChanged"
-                                            v-if="softSkillsPrompt.length"
-                                        />
-                                        </div> 
-                                        <p v-if="!v$.userForm.softSkills.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Выберите ваши софт скиллы</p>
-                                        <div :class="[{'mt-8' : userForm.softSkills.length}, 'flex flex-wrap']">
-                                            <span 
-                                                v-for="(item, idx) in userForm.softSkills" :key="idx" 
-                                                class="text-[18px] w-fit flex items-center justify-between bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-5 hover:bg-gray-100"
-                                            >
-                                                {{ item }} <svg aria-hidden="true" @click="delSoftSkill(idx)" class="w-6 h-6 ml-4 mt-1 cursor-pointer" fill="#5282E7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></span>
-                                        </div>
-                                    <div>
+                                        <input 
+                                            @keypress="hardSkillHandler" 
+                                            @focus="userForm.dropDownState.isHardSkills = true"
+                                            @blur="blurHandler('hard')"
+                                            v-model="userForm.hardSkill" 
+                                            type="text" 
+                                            autocomplete="off" 
+                                            id="hardSkill" 
+                                            ref="hardSkill"
+                                            class="flex items-center justify-between pr-20 text-white bg-transparent border border-solid border-white text-xl rounded-3xl outline-none w-full px-6 py-4 cursor-pointer" 
+                                            placeholder="Hard skill"
+                                        >
+                                    </div>
+                                    <Dropdown 
+                                        :items="hardSkillsPrompt"
+                                        :isActive="userForm.dropDownState.isHardSkills"
+                                        :height="'max-h-fit'"
+                                        :fontSize="'text-xl'"
+                                        category="hardSkills"
+                                        @itemHandler="handleItemChanged"
+                                        v-if="hardSkillsPrompt.length"
+                                    />
+                                    <p v-if="!v$.userForm.hardSkills.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Выберите ваши хард скиллы</p>
+                                    <div :class="[{'mt-8' : userForm.hardSkills.length}, 'flex flex-wrap']">
+                                        <span 
+                                            v-for="(item, idx) in userForm.hardSkills" :key="idx" 
+                                            class="text-[18px] w-fit flex items-center justify-between bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-5 hover:bg-gray-100"
+                                        >
+                                            {{ item }} <svg aria-hidden="true" @click="delHardSkill(idx)" class="w-6 h-6 ml-4 mt-1 cursor-pointer" fill="#5282E7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="relative">
-                                <h1 class="text-2xl mb-5">Hard skills</h1>
+                            <div class="mb-10 relative">
+                                <h1 class="text-2xl mb-5">Проект</h1>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
                                         <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                     </div>
                                     <input 
-                                        @keypress="hardSkillHandler" 
-                                        @focus="userForm.dropDownState.isHardSkills = true"
-                                        @blur="blurHandler('hard')"
-                                        v-model="userForm.hardSkill" 
+                                        @keypress="projectHandler" 
+                                        @focus="userForm.dropDownState.isProject = true"
+                                        @blur="blurHandler('project')"
+                                        v-model="userForm.project" 
                                         type="text" 
                                         autocomplete="off" 
-                                        id="hardSkill" 
-                                        ref="hardSkill"
-                                        class="flex items-center justify-between pr-20 text-white bg-transparent border border-solid border-white text-xl rounded-3xl outline-none w-full px-6 py-4 cursor-pointer" 
-                                        placeholder="Hard skill"
+                                        id="project"
+                                        ref="project"
+                                        class="flex items-center justify-between pr-20 text-white bg-transparent border border-solid border-white text-2xl rounded-3xl outline-none w-full px-6 py-4 cursor-pointer" 
+                                        placeholder="Выберите проект"
                                     >
                                 </div>
                                 <Dropdown 
-                                    :items="hardSkillsPrompt"
-                                    :isActive="userForm.dropDownState.isHardSkills"
+                                    :items="projectsPrompt"
+                                    :isActive="userForm.dropDownState.isProject"
                                     :height="'max-h-fit'"
                                     :fontSize="'text-xl'"
-                                    category="hardSkills"
+                                    category="project"
                                     @itemHandler="handleItemChanged"
-                                    v-if="hardSkillsPrompt.length"
                                 />
-                                <p v-if="!v$.userForm.hardSkills.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Выберите ваши хард скиллы</p>
-                                <div :class="[{'mt-8' : userForm.hardSkills.length}, 'flex flex-wrap']">
-                                    <span 
-                                        v-for="(item, idx) in userForm.hardSkills" :key="idx" 
-                                        class="text-[18px] w-fit flex items-center justify-between bg-white rounded-full px-5 py-2 font-semibold text-gray-700 mr-4 mb-5 hover:bg-gray-100"
-                                    >
-                                        {{ item }} <svg aria-hidden="true" @click="delHardSkill(idx)" class="w-6 h-6 ml-4 mt-1 cursor-pointer" fill="#5282E7" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg></span>
+                                <p v-if="v$.userForm.project.$invalid && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Выберите проект</p>
+                            </div>
+                            <div class="px-6">
+                                <h1 class="text-2xl mb-8">Контакты</h1>
+                                <div>
+                                    <div class="mb-10">
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none">
+                                                <label class="z-20 absolute -top-4 left-12 text-xl bg-black text-white px-2">Почта</label>
+                                                <img class="w-10 h-10" :class="{'opacity-60' : !userForm.contacts.mail}" src="../../assets/images/mail.svg" alt="mail" />
+                                            </div>
+                                            <input @input="v$.userForm.contacts.mail.$touch" v-model="userForm.contacts.mail" type="email" id="mail" autocomplete="off" class="peer border text-white bg-transparent text-2xl rounded-3xl outline-none block w-full px-24 py-6" placeholder="Forexample@forexample.com">
+                                        </div>
+                                        <p v-if="!v$.userForm.contacts.mail.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите правильную почту</p>
+                                    </div>
+                                    <div class="mb-10">
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none">
+                                                <label class="z-20 absolute -top-4 left-12 text-xl bg-black text-white px-2">Telegram</label>
+                                                <img class="w-10 h-10" :class="{'opacity-60' : !userForm.contacts.telegram}" src="../../assets/images/telega.svg" alt="mail" />
+                                            </div>
+                                            <input @input="v$.userForm.contacts.telegram.$touch" v-model="userForm.contacts.telegram" v-maska data-maska="!@**********************" type="text" autocomplete="off" id="telegram" class="border text-white bg-transparent text-2xl rounded-3xl outline-none block w-full px-24 py-6" placeholder="@Forexample">
+                                        </div>
+                                        <p v-if="!v$.userForm.contacts.telegram.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите ваш профиль в telegram</p>
+                                    </div>
+                                    <div class="mb-10">
+                                        <div class="relative">
+                                            <div class="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none">
+                                                <label class="z-20 absolute -top-4 left-12 text-xl bg-black text-white px-2">Телефон</label>
+                                                <img class="w-10 h-10" :class="{'opacity-60' : !userForm.contacts.phone}" src="../../assets/images/phone.svg" alt="mail" />
+                                            </div>
+                                            <input @input="v$.userForm.contacts.phone.$touch" v-model="userForm.contacts.phone" v-maska data-maska="+# (###) ###-##-##" type="phone" autocomplete="off" id="phone" class="border text-white bg-transparent text-2xl rounded-3xl outline-none block w-full px-24 py-6" placeholder="+7 (777) 777-77-77">
+                                        </div>
+                                        <p v-if="!v$.userForm.contacts.phone.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите ваш номер телефона</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="mb-10 relative">
-                            <h1 class="text-2xl mb-5">Проект</h1>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-                                    <svg class="w-8 h-8 mr-9 opacity-60" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
-                                <input 
-                                    @keypress="projectHandler" 
-                                    @focus="userForm.dropDownState.isProject = true"
-                                    @blur="blurHandler('project')"
-                                    v-model="userForm.project" 
-                                    type="text" 
-                                    autocomplete="off" 
-                                    id="project"
-                                    ref="project"
-                                    class="flex items-center justify-between pr-20 text-white bg-transparent border border-solid border-white text-2xl rounded-3xl outline-none w-full px-6 py-4 cursor-pointer" 
-                                    placeholder="Выберите проект"
-                                >
-                            </div>
-                            <Dropdown 
-                                :items="projectsPrompt"
-                                :isActive="userForm.dropDownState.isProject"
-                                :height="'max-h-fit'"
-                                :fontSize="'text-xl'"
-                                category="project"
-                                @itemHandler="handleItemChanged"
-                            />
-                            <p v-if="v$.userForm.project.$invalid && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Выберите проект</p>
-                        </div>
-                        <div class="px-6">
-                            <h1 class="text-2xl mb-8">Контакты</h1>
-                            <div>
-                                <div class="mb-10">
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none">
-                                            <label class="z-20 absolute -top-4 left-12 text-xl bg-black text-white px-2">Почта</label>
-                                            <img class="w-10 h-10" :class="{'opacity-60' : !userForm.contacts.mail}" src="../../assets/images/mail.svg" alt="mail" />
-                                        </div>
-                                        <input @input="v$.userForm.contacts.mail.$touch" v-model="userForm.contacts.mail" type="email" id="mail" autocomplete="off" class="peer border text-white bg-transparent text-2xl rounded-3xl outline-none block w-full px-24 py-6" placeholder="Forexample@forexample.com">
-                                    </div>
-                                    <p v-if="!v$.userForm.contacts.mail.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите правильную почту</p>
-                                </div>
-                                <div class="mb-10">
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none">
-                                            <label class="z-20 absolute -top-4 left-12 text-xl bg-black text-white px-2">Telegram</label>
-                                            <img class="w-10 h-10" :class="{'opacity-60' : !userForm.contacts.telegram}" src="../../assets/images/telega.svg" alt="mail" />
-                                        </div>
-                                        <input @input="v$.userForm.contacts.telegram.$touch" v-model="userForm.contacts.telegram" v-maska data-maska="!@******************************" type="text" autocomplete="off" id="telegram" class="border text-white bg-transparent text-2xl rounded-3xl outline-none block w-full px-24 py-6" placeholder="@Forexample">
-                                    </div>
-                                    <p v-if="!v$.userForm.contacts.telegram.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите ваш профиль в telegram</p>
-                                </div>
-                                <div class="mb-10">
-                                    <div class="relative">
-                                        <div class="absolute inset-y-0 left-0 flex items-center pl-8 pointer-events-none">
-                                            <label class="z-20 absolute -top-4 left-12 text-xl bg-black text-white px-2">Телефон</label>
-                                            <img class="w-10 h-10" :class="{'opacity-60' : !userForm.contacts.phone}" src="../../assets/images/phone.svg" alt="mail" />
-                                        </div>
-                                        <input @input="v$.userForm.contacts.phone.$touch" v-model="userForm.contacts.phone" v-maska data-maska="+# (###) ###-##-##" type="phone" autocomplete="off" id="phone" class="border text-white bg-transparent text-2xl rounded-3xl outline-none block w-full px-24 py-6" placeholder="+7 (777) 777-77-77">
-                                    </div>
-                                    <p v-if="!v$.userForm.contacts.phone.$model.length && wasSubmitted" class="mt-2 text-xl text-red-600 dark:text-red-500">Укажите ваш номер телефона</p>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="submit" class="text-white text-xl bg-blue-dark hover:bg-blue-darker font-medium rounded-2xl px-14 py-3.5 mt-6 mr-2 mb-2 float-right">Сохранить изменения</button>
-                    </form>
+                            <button type="submit" class="text-white text-xl bg-blue-dark hover:bg-blue-darker font-medium rounded-2xl px-14 py-3.5 mt-6 mr-2 mb-2 float-right">Сохранить изменения</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -316,10 +320,15 @@ import { required, email } from '@vuelidate/validators'
 import imageData from '../../assets/images/undefined_logo.svg';
 import { vMaska } from "maska";
 
+import Navbar from '../../components/layout/Navbar/Navbar.vue';
+import Footer from '../../components/layout/Footer/Footer.vue';
+
 export default {
   components: {
     Dropdown,
-  },
+    Navbar,
+    Footer
+},
   directives: { 
     maska: vMaska
   },

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Navbar></Navbar>
         <div class="container max-w-3xl flex flex-col items-start mx-auto px-2 p-12">
             <div class="relative w-full">
                 <div class="ellipse ellipse-cyan"></div>
@@ -36,7 +37,7 @@
                 </div>
                 <router-link  
                     to="/personal-info-edit"
-                    class="w-full flex justify-center items-center text-xl bg-blue-dark hover:bg-blue-darker rounded-full py-[14px] mb-12 mx-auto"
+                    class="w-full flex justify-center items-center text-xl bg-blue-dark hover:bg-blue-darker rounded-full py-[14px] mb-12 mx-auto relative z-10"
                 >
                     <img class="w-5 h-5 mr-5" src="../../assets/images/pen.svg" alt="user photo">
                     Редактировать профиль
@@ -186,76 +187,81 @@
                 </div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 <script>
+import Navbar from '../../components/layout/Navbar/Navbar.vue';
+import Footer from '../../components/layout/Footer/Footer.vue';
+
 export default {
     data() {
         return {
             user: {
-                profile_image: '',
-                name: '',
-                surname: '',
-                work: '',
-                level: '',
+                profile_image: "",
+                name: "",
+                surname: "",
+                work: "",
+                level: "",
                 date_of_birth: {
-                    day: '',
-                    month: '',
-                    year: ''
+                    day: "",
+                    month: "",
+                    year: ""
                 },
-                employmentTime: '',
-                personality: '',
+                employmentTime: "",
+                personality: "",
                 softSkills: [],
                 hardSkills: [],
-                project: '',
+                project: "",
                 contacts: {
-                    mail: '',
-                    telegram: '',
-                    phone: ''
+                    mail: "",
+                    telegram: "",
+                    phone: ""
                 }
             }
-        }
+        };
     },
     computed: {
         levelPercent() {
             switch (this.user.level) {
-                case 'Junior':
+                case "Junior":
                     return {
                         percent: 30,
-                        left: '12.75rem'
+                        left: "12.75rem"
                     };
-                case 'Junior+':
-                return {
+                case "Junior+":
+                    return {
                         percent: 40,
-                        left: '17.75rem'
+                        left: "17.75rem"
                     };
-                case 'Middle':
-                return {
+                case "Middle":
+                    return {
                         percent: 60,
-                        left: '27rem'
+                        left: "27rem"
                     };
-                case 'Middle+':
-                return {
+                case "Middle+":
+                    return {
                         percent: 80,
-                        left: '36.5rem'
+                        left: "36.5rem"
                     };
-                case 'Senior':
-                return {
+                case "Senior":
+                    return {
                         percent: 100,
-                        left: '46.5rem'
+                        left: "46.5rem"
                     };
                 default:
                     return 0;
             }
         },
         userPersonality() {
-            return `${this.user.personality}`.replaceAll('\n', '<br>');
+            return `${this.user.personality}`.replaceAll("\n", "<br>");
         }
     },
     created() {
         this.user = this.$store.state.user;
-    }
+    },
+    components: { Navbar, Footer }
 }
 </script>
 

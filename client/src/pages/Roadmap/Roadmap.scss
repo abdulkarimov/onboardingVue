@@ -1,0 +1,151 @@
+.dark-blue-ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #5182E7 0%, #6D61EA 52%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+.dark-purple-ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #AD01DB 0%, #8700AB 52%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+.dark-cyan-ball {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #0FCBE4 0%, #0197AB 52%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 15px rgba(0, 0, 0, 0.25);
+}
+.checkbox-wrapper *,
+.checkbox-wrapper ::after,
+.checkbox-wrapper ::before {
+    box-sizing: border-box;
+}
+.checkbox-wrapper [type=checkbox].substituted {
+    margin: 0;
+    width: 0;
+    height: 0;
+    display: inline;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+.checkbox-wrapper [type=checkbox].substituted + label:before {
+    content: "";
+    display: inline-block;
+    vertical-align: top;
+    height: 1.15em;
+    width: 1.15em;
+    margin-right: 0.6em;
+    color: rgba(0, 0, 0, 0.275);
+    border: solid 0.06em;
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em inset, 0 0 0 0.07em transparent inset;
+    border-radius: 0.2em;
+    border: 2px solid #fff;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" fill="white" viewBox="0 0 9 9"><rect x="0" y="4.3" transform="matrix(-0.707 -0.7072 0.7072 -0.707 0.5891 10.4702)" width="4.3" height="1.6" /><rect x="2.2" y="2.9" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 12.1877 2.9833)" width="6.1" height="1.7" /></svg>') no-repeat center, transparent;
+    background-size: 0;
+    will-change: color, border, background, background-size, box-shadow;
+    transform: translate3d(0, 0, 0);
+    transition: color 0.1s, border 0.1s, background 0.15s, box-shadow 0.1s;
+    font-size: 1.25rem;
+}
+.checkbox-wrapper [type=checkbox]#checkox-5 + label:before {
+    content: "";
+    width: 2.9em;
+}
+.checkbox-wrapper [type=checkbox]#checkox-6 + label:before {
+    content: "";
+    width: 1.6em;
+}
+.checkbox-wrapper [type=checkbox].substituted:enabled:active + label:before,
+.checkbox-wrapper [type=checkbox].substituted:enabled + label:active:before {
+    box-shadow: 0 0 0.04em, 0 0.06em 0.16em -0.03em transparent inset, 0 0 0 0.07em rgba(0, 0, 0, 0.1) inset;
+}
+.checkbox-wrapper [type=checkbox].substituted:checked + label:before {
+    background-size: 0.75em;
+    color: rgba(0, 0, 0, 0.075);
+}
+
+.ellipse{
+    position: absolute;
+
+    &-dark-blue {
+        width: 370px;
+        height: 370px;
+        
+        background: #1130CC;
+        opacity: 0.3;
+        filter: blur(159.0px);
+        top: -6rem;
+        left: -7rem;
+    }
+
+    &-dark-blue2 {
+        width: 570px;
+        height: 500px;
+
+        background: #1130CC;
+        opacity: 0.25;
+        filter: blur(159px);
+        bottom: -5rem;
+        right: 2rem;
+    }
+    
+    &-dark-blue2 {
+        width: 570px;
+        height: 500px;
+
+        background: #1130CC;
+        opacity: 0.25;
+        filter: blur(159px);
+        bottom: -5rem;
+        right: 2rem;
+    }
+    
+    &-purple {
+        width: 520px;
+        height: 375px;
+
+        background: #C701FC;
+        opacity: 0.2;
+        filter: blur(159px);
+        top: 1.5rem;
+        right: -5rem;
+    }
+    
+    &-purple2 {
+        width: 520px;
+        height: 375px;
+
+        background: #C701FC;
+        opacity: 0.2;
+        filter: blur(159px);
+        top: -1.5rem;
+        right: 2rem;
+    }
+    
+    &-cyan {
+        width: 420px;
+        height: 230px;
+
+        background: #00C8E2;
+        opacity: 0.3;
+        filter: blur(159px);
+        top: 3rem;
+        right: -6rem;
+    }
+    
+    &-blue {
+        width: 420px;
+        height: 320px;
+
+        background: #00C8E2;
+        opacity: 0.2;
+        filter: blur(159px);
+        top: -3rem;
+        left: -10rem;
+    }
+}

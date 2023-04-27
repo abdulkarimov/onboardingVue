@@ -73,7 +73,8 @@ const store = new Vuex.Store({
                 subdivision: 'Mycent',
                 wave: mycentWave
             }
-        ]
+        ],
+        previousPage: ''
     }
 });
 

@@ -16,6 +16,13 @@ export default {
             document.body.style.overflowY = 'scroll';
             this.$emit('closeWindow')
         }
+    },
+    watch: {
+        isNotification() {
+            if (!this.isNotification) {
+                document.body.style.overflowY = 'scroll';
+            }
+        }
     }
 }
 </script>
