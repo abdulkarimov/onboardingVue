@@ -14,8 +14,8 @@
             <div class="container mx-auto px-5 pt-10">
                 <div class="w-full">
                     <h1 class="text-5xl font-medium mb-14">О проекте</h1>
-                    <p class="text-xl leading-6 w-10/12 mb-10">Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate.  Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.</p>
-                    <p class="flex items-center text-xl mb-12 opacity-80 relative z-10">Подразделение: <span class="text-4xl ml-6">{{ project.subdivision }}</span></p>
+                    <p class="text-xl leading-6 w-10/12 mb-10">{{ project.description }}</p>
+                    <p class="flex items-center text-xl mb-12 opacity-80 relative z-10">Подразделение: <span class="text-4xl ml-6">{{ project.name }}</span></p>
                     <h1 class="text-5xl font-medium mb-12 relative z-10">Команда</h1>
                     <div class="relative">
                         <div class="ellipse ellipse-purple"></div>

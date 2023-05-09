@@ -235,7 +235,6 @@ export default {
         }
     },
     created() {
-        console.log(this.$store.state.previousPage);
         if (this.$store.state.previousPage) {
             this.isGreettingModal = true;
         } else {

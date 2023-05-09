@@ -40,7 +40,8 @@ const store = new Vuex.Store({
                 mail: 'arturdalakan748@gmail.com',
                 telegram: '@forexample123',
                 phone: '+7 (777) 777-77-77'
-            }
+            },
+            isAdmin: false
         },
         projects: [
             {

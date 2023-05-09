@@ -13,46 +13,13 @@
                             </div>
                             <div class="col-span-2 relative z-10">
                                 <div class="pl-36">
-                                    <div class="col">
+                                    <div class="col" v-for="n of questions.length">
                                         <div class="tabs">
                                             <div class="tab">
-                                                <input type="checkbox" id="chck1">
-                                                <label class="tab-label" for="chck1">Lorem ipsum dolor sit amet consectetur leo elit ?</label>
+                                                <input type="checkbox" :id="'chck' + n">
+                                                <label class="tab-label" :for="'chck' + n">{{ questions[n - 1]?.name }}</label>
                                                 <div class="tab-content opacity-75">
-                                                    Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="tabs">
-                                            <div class="tab">
-                                                <input type="checkbox" id="chck2">
-                                                <label class="tab-label" for="chck2">Lorem ipsum dolor sit amet urus egestas at vulputate bibendum ac lacus ?</label>
-                                                <div class="tab-content opacity-75">
-                                                    Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="tabs">
-                                            <div class="tab">
-                                                <input type="checkbox" id="chck3">
-                                                <label class="tab-label" for="chck3">Lorem ipsum dolor sit amet urus egestas bibend ac lacus ?</label>
-                                                <div class="tab-content opacity-75">
-                                                    Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="tabs">
-                                            <div class="tab">
-                                                <input type="checkbox" id="chck4">
-                                                <label class="tab-label" for="chck4">Lorem ipsum dolor sit amet urus egestas bibendum ac rog lacus ?</label>
-                                                <div class="tab-content opacity-75">
-                                                    Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
+                                                    {{ answers[n - 1]?.content }}
                                                 </div>
                                             </div>
                                         </div>
@@ -66,39 +33,17 @@
                                 <h3 class="text-[2.5rem] font-normal">Конфиденциальность</h3>
                             </div>
                             <div class="col-span-2 pl-36">
-                                <div class="col">
-                                    <div class="tabs">
-                                        <div class="tab">
-                                            <input type="checkbox" id="chck5">
-                                            <label class="tab-label" for="chck5">Lorem ipsum dolor sit amet urus egestas at vulputate bibendum ac lacus ?</label>
-                                            <div class="tab-content opacity-75">
-                                                Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
+                                <div class="col" v-for="n of questions.length">
+                                        <div class="tabs">
+                                            <div class="tab">
+                                                <input type="checkbox" :id="'chck' + n * 100">
+                                                <label class="tab-label" :for="'chck' + n * 100">{{ questions[n - 1]?.name }}</label>
+                                                <div class="tab-content opacity-75">
+                                                    {{ answers[n - 1]?.content }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="tabs">
-                                        <div class="tab">
-                                            <input type="checkbox" id="chck6">
-                                            <label class="tab-label" for="chck6">Lorem ipsum dolor sit amet urus egestas bibend ac lacus ?</label>
-                                            <div class="tab-content opacity-75">
-                                                Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="tabs">
-                                        <div class="tab">
-                                            <input type="checkbox" id="chck7">
-                                            <label class="tab-label" for="chck7">Lorem ipsum dolor sit amet urus egestas bibendum ac rog lacus ?</label>
-                                            <div class="tab-content opacity-75">
-                                                Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="grid grid-cols-3 gap-4 relative z-10">
@@ -106,46 +51,13 @@
                                 <h3 class="text-[2.5rem] font-normal">Договоренность</h3>
                             </div>
                             <div class="col-span-2 pl-36">
-                                <div class="col">
+                                <div class="col" v-for="n of questions.length">
                                     <div class="tabs">
                                         <div class="tab">
-                                            <input type="checkbox" id="chck8">
-                                            <label class="tab-label" for="chck8">Lorem ipsum dolor sit amet urus egestas at vulputate bibendum ac lacus ?</label>
+                                            <input type="checkbox" :id="'chck' + n * 900000">
+                                            <label class="tab-label" :for="'chck' + n * 900000">{{ questions[n - 1]?.name }}</label>
                                             <div class="tab-content opacity-75">
-                                                Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="tabs">
-                                        <div class="tab">
-                                            <input type="checkbox" id="chck9">
-                                            <label class="tab-label" for="chck9">Lorem ipsum dolor sit amet urus egestas bibend ac lacus ?</label>
-                                            <div class="tab-content opacity-75">
-                                                Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="tabs">
-                                        <div class="tab">
-                                            <input type="checkbox" id="chck10">
-                                            <label class="tab-label" for="chck10">Lorem ipsum dolor sit amet urus egestas bibendum ac rog lacus ?</label>
-                                            <div class="tab-content opacity-75">
-                                                Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="tabs">
-                                        <div class="tab">
-                                            <input type="checkbox" id="chck11">
-                                            <label class="tab-label" for="chck11">Lorem ipsum dolor sit amet urus egestas bibendum acgofd rog lacus ?</label>
-                                            <div class="tab-content opacity-75">
-                                                Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo. Purus egestas at vulputate bibendum ac lacus vulputate. Purus egestas at vulputate bibendum ac lacus vulputate. Lorem ipsum dolor sit amet consectetur. Leo commodo arcu elit aliquet habitasse id risus commodo.
+                                                {{ answers[n - 1]?.content }}
                                             </div>
                                         </div>
                                     </div>
@@ -158,6 +70,7 @@
                 </div>
             </div>
         </div>
+        <!-- <input type="image" alt="image" src="http://127.0.0.1:3000/api/img/upload"> -->
         <Footer></Footer>
     </div>
 </template>
@@ -166,11 +79,35 @@
 import Navbar from '../../components/layout/Navbar/Navbar.vue';
 import Footer from '../../components/layout/Footer/Footer.vue';
 
+import axios from 'axios';
+
 export default {
     components: {
         Navbar,
         Footer,
-    }
+    },
+    data(){
+        return {
+            questions: [],
+            answers: []
+        }
+    },
+    created() {
+        axios.get("http://127.0.0.1:3000/api/question/get")
+        .then(response => {
+            this.questions = response.data;
+        });
+
+        axios.get("http://127.0.0.1:3000/api/answer/get")
+        .then(response => {
+            this.answers = response.data;
+        });
+
+        axios.get("http://127.0.0.1:3000/api/img/upload")
+        .then(response => {
+            console.log(response);
+        });
+    },
 }
 </script>
 

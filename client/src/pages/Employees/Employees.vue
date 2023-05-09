@@ -22,32 +22,32 @@
                                     <div class="text-[18px] relative text-start w-1/4 pl-10">Команда</div>
                                 </div>
                                 <div class="bg-white text-black text-[17px] font-normal rounded-2xl relative z-10">
-                                    <div v-for="n in 10" class="flex items-center employee w-full" id="employeeMain">
+                                    <div v-for="user of users" class="flex items-center employee w-full" id="employeeMain">
                                         <div class="flex items-center w-full employeeBody cursor-pointer transition hover:bg-gray-100">
                                             <div class="flex items-center px-6 py-4 w-[35%]">
                                                 <img class="w-10 h-10 rounded-full" src="../../assets/images/zhanizbay_daulet.svg" alt="Жанысбай Даулет">
-                                                <p class="pl-5">Владимир Козловский</p>
+                                                <p class="pl-5">{{ user.name }}</p>
                                             </div>
-                                            <div class="whitespace-nowrap px-6 py-2 align-middle w-1/4">Frontend-разработчик</div>
-                                            <div class="whitespace-nowrap px-8 py-2 align-middle mx-3 w-[15%]" style="color: #00000080">Middle</div>
-                                            <div class="whitespace-nowrap px-6 py-2 align-middle text-start w-1/4">Centras Komesk Life</div>
+                                            <div class="whitespace-nowrap px-6 py-2 align-middle w-1/4">{{ user.Position.name }}</div>
+                                            <div class="whitespace-nowrap px-8 py-2 align-middle mx-3 w-[15%]" style="color: #00000080">{{ user.Position.name }}</div>
+                                            <div class="whitespace-nowrap px-6 py-2 align-middle text-start w-1/4">{{ user.Department.name }}</div>
                                         </div>
                                         <div class="relative">
                                             <div id="tooltip" class="absolute top-0 left-[-710px] invisible opacity-0 inline-block w-fit p-10 pr-20 pb-6 text-sm text-black transition-opacity duration-300 bg-white rounded-2xl shadow-sm">
                                                 <div class="flex items-start gap-8">
                                                     <img class="w-40" src="../../assets/images/zhanizbay_daulet2.svg" alt="daulet">
                                                     <div>
-                                                        <h2 class="text-3xl font-bold mb-2">Жансыбай Даулет</h2>
-                                                        <h3 class="text-[1.4rem] font-regular text-blue-dark">Middle Backend-разработчик</h3>
+                                                        <h2 class="text-3xl font-bold mb-2">{{ user.name }}</h2>
+                                                        <h3 class="text-[1.4rem] font-regular text-blue-dark">{{ user.Position.name }}</h3>
                                                         <div class="flex items-center my-2 mt-3 opacity-30">
-                                                            <p class="text-gray-600 text-[15px] font-medium">04.04.2005</p>
+                                                            <p class="text-gray-600 text-[15px] font-medium">{{ user.dateOfBirth }}</p>
                                                             <div class="bg-gray-600 w-[0.5px] h-[20px] mx-2"></div>
-                                                            <p class="text-gray-600 text-[15px] font-medium">c 09:00 до 18:00</p>
+                                                            <p class="text-gray-600 text-[15px] font-medium">{{ user.schedule }}</p>
                                                         </div>
                                                         <div class="flex flex-col gap-1">
                                                             <div class="flex items-center">
                                                                 <img class="w-4 h-4 mr-3 blackSvg" src="../../assets/images/mail.svg" alt="user photo">
-                                                                <p class="text-[16px] font-medium">z.daulet@gmail.com</p>
+                                                                <p class="text-[16px] font-medium">{{ user.Contacts.email }}</p>
                                                             </div>
                                                             <div class="flex items-center">
                                                                 <img class="w-4 h-4 mr-3 blackSvg" src="../../assets/images/telegram.svg" alt="user photo">
@@ -55,13 +55,13 @@
                                                             </div>
                                                             <div class="flex items-center">
                                                                 <img class="w-4 h-4 mr-3 blackSvg" src="../../assets/images/phone.svg" alt="user photo">
-                                                                <p class="text-[16px] font-medium">+7 (777) 777-77-77</p>
+                                                                <p class="text-[16px] font-medium">{{ user.Contacts.workPhone }}</p>
                                                             </div>
                                                         </div>
-                                                        <p class="flex items-center text-[1.2rem] font-medium mt-4 relative z-10">Команда: <span class="text-2xl ml-6 font-regular">Alpha</span></p>
+                                                        <p class="flex items-center text-[1.2rem] font-medium mt-4 relative z-10">Команда: <span class="text-2xl ml-6 font-regular">{{ user.Department.name }}</span></p>
                                                         <p class="flex items-center text-[1.2rem] font-medium mt-4 mb-4 relative z-10">Hard skills</p>
                                                         <div class="max-w-[25rem]">
-                                                            <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">Java</span>
+                                                            <!-- <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">Java</span>
                                                             <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">Python</span>
                                                             <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">C#</span>
                                                             <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">MySQL</span>
@@ -69,7 +69,8 @@
                                                             <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">Oracle</span>
                                                             <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">HTTP</span>
                                                             <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">Node.js</span>
-                                                            <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">Flask</span>
+                                                            <span class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">Flask</span> -->
+                                                            <span v-for="skill of user.Skills" class="text-xs text-gray-700 font-semibold inline-block rounded-full px-4 pt-[6px] pb-2 mr-3 mb-3 border-2 border-solid border-black">{{ skill }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -114,7 +115,7 @@
             </div>
             <div class="w-full">
                 <h1 class="text-[2.75rem] font-medium mb-20">Организационная структура </h1>
-                <img class="w-full" src="../../assets/images/project_structure.png" alt="structure">
+                <img class="w-full" src="../../assets/images/project_structure2.png" alt="structure">
             </div>
         </div>
         <Footer></Footer>
@@ -124,6 +125,7 @@
 <script>
 import Navbar from '../../components/layout/Navbar/Navbar.vue';
 import Footer from '../../components/layout/Footer/Footer.vue';
+import axios from 'axios';
 
 export default {
     components: {
@@ -136,13 +138,13 @@ export default {
                 pagesCount: 5,
                 currentPage: 1
             },
-            searchField: ''
+            searchField: '',
+            users: []
         }
     },
     methods: {
         searchHandler(e) {
             if(e.key === "Enter") {
-                console.log(this.searchField);
                 this.searchField = 'Бэка ещё нет :('
             }
         },
@@ -160,6 +162,12 @@ export default {
 
             this.pagination.currentPage += 1;
         },
+    },
+    created() {
+        axios.get("http://127.0.0.1:3000/api/user/get")
+        .then(response => {
+            this.users = response.data;
+        });
     }
 }
 </script>

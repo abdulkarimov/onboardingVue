@@ -5,11 +5,14 @@
             <div class="relative w-full">
                 <div class="ellipse ellipse-cyan"></div>
                 <div class="flex items-center gap-12 pb-10">
-                    <img class="w-56 h-56 rounded-full" :src="user.profile_image" alt="user photo">
+                    <div class="relative">
+                        <img class="w-56 h-56 rounded-full" :src="user.profile_image" alt="user photo">
+                        <div v-if="user.isAdmin" class="absolute right-0 bottom-4 bg-white font-semibold text-blue w-fit px-4 rounded-2xl">Admin</div>
+                    </div>
                     <div class="flex flex-col">
                         <h2 class="text-[2.5rem] font-medium">{{ user.name }} {{ user.surname }}</h2>
                         <h4 id="work" class="text-2xl text-blue-dark">{{ user.level }} {{ user.work }}</h4>
-                        <div id="tooltip" class="absolute top-24 z-10 visible opacity-0 inline-block px-5 py-5 text-sm text-black transition-opacity duration-300 bg-white w-96 rounded-3xl shadow-sm">
+                        <div id="tooltip" class="absolute top-24 z-30 visible opacity-0 inline-block px-5 py-5 text-sm text-black transition-opacity duration-300 bg-white w-96 rounded-3xl shadow-sm">
                             <p class="text-base font-medium">Должностные обязанности</p>
                             <p class="text-base font-medium text-blue-darkest">{{ user.work }}</p>
                             <p class="text-base">Lorem ipsum dolor sit amet consectetur. Elit purus sit suspendisse arcu tincidunt quis. Erat cursus urna in aenean feugiat faucibus. Aliquam mauris phasellus eget donec aliquam magna tristique. Eleifend netus ipsum faucibus eget.</p>
@@ -44,7 +47,7 @@
                 </router-link>
                 <div class="flex justify-between mb-3 w-full">
                     <span class="text-lg font-light text-gray-300">Новичок</span>
-                    <span class="text-lg font-light text-gray-300">Профессионал</span>
+                    <span class="text-lg font-light text-gray-300" :class="{ 'text-white font-normal relative left-6' : user.isAdmin }">Профессионал</span>
                 </div>
             </div>
             <div class="relative">
@@ -55,7 +58,7 @@
                             <span
                                 class="bg-blue-dark absolute bottom-[-26px] left-1/3 h-4 w-4 rounded-full"
                             ></span>
-                            {{ this.levelPercent.percent }}% 
+                            {{ !user.isAdmin ? this.levelPercent.percent + '%' : '' }}
                         </span>
                     </div>
                 </div>
@@ -96,7 +99,7 @@
                         <img class="w-full left-0 bottom-0 absolute" src="../../assets/images/blue_wave.png" alt="wave">
                     </div>
                 </div>
-                <div class="mb-20">
+                <div class="mb-20" v-if="!user.isAdmin">
                     <h1 class="text-[28px] mb-2">Наставник</h1>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-8">
@@ -125,14 +128,14 @@
             </div>
         </div>
         <div class="container flex flex-col items-start mx-auto">
-            <div class="mb-14 relative z-10 w-full">
+            <div class="mb-14 relative z-10 w-full" v-if="!user.isAdmin">
                 <h1 class="text-[28px] mb-5">Полезные файлы</h1>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="flex items-center justify-center h-8 py-14 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white">Презентация OnBoarding</div>
                     <div class="flex items-center justify-center h-8 py-14 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white">Дорожная карта новичка</div>
                 </div>
             </div>
-            <div class="mb-16 relative z-10 w-full">
+            <div class="mb-16 relative z-10 w-full" v-if="!user.isAdmin">
                 <h1 class="text-[28px] mb-3">Анкеты</h1>
                 <div class="grid grid-cols-2 gap-6">
                     <div class="flex items-center flex-col py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white opacity-50">
@@ -145,44 +148,43 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-14 relative z-10 w-full" v-if="user.isAdmin">
+                <h1 class="text-[28px] mb-5">Файлы</h1>
+                <div class="grid grid-cols-3 gap-6">
+                    <div v-for="(file, id) of files" class="flex items-center justify-center h-8 py-14 text-base font-medium text-white rounded-[20px] border-2 border-solid border-white text-center relative parent">
+                        <div class="pen" @click="file.isEditing = !file.isEditing, !file.text ? files.splice(id, 1) : ''"></div>
+                        <div class="trash" @click="files.splice(id, 1)"></div>
+                        <p v-html="file.text" v-if="!file.isEditing"></p>
+                        <input @keypress="changeFiles(id)" class="bg-transparent text-white outline-none text-center opacity-80" v-model="file.text" placeholder="Название файла..." v-if="file.isEditing">
+                    </div>
+                    <div class="flex items-center justify-center h-8 py-14 text-base font-medium text-white rounded-[20px] text-center">
+                        <div @click="files.push({ text: 'new file', isEditing: false })" class="bg-[#969696] text-black text-4xl font-bold pb-[0.45rem] w-12 h-12 flex items-center justify-center rounded-full cursor-pointer transition-all hover:bg-white">
+                            +
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="mb-32 relative z-10 w-full">
                 <h1 class="text-[28px] mb-8">Какие доступы нужно получить?</h1>
                 <div class="grid grid-cols-6 gap-5">
-                    <div class="flex flex-col items-center">
+                    <div v-for="(acc, id) of access" class="flex flex-col items-center relative" :class="{ 'parent2' : user.isAdmin }">
                         <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
-                            <img class="w-12 h-12" src="../../assets/images/outlook.svg" alt="outlook">
+                            <img v-if="!acc.isEditing" class="w-12 h-12 transition-all" :class="`${String(acc.path).includes('mycent.kz') ? 'w-28' : '' ? acc.path === kias : 'w-16'}`" :src="acc.path" alt="image">
+                            <div v-if="acc.isEditing && user.isAdmin" class="absolute w-10 h-10 bg-[#b5b5b5] blur-md opacity-70"></div>
+                            <div v-if="acc.isEditing && user.isAdmin" class="access-pen cursor-pointer" @click="acc.isEditing = !acc.isEditing, !acc.text ? access.splice(id, 1) : ''"></div>
+                            <div v-if="acc.isEditing && user.isAdmin" class="access-trash cursor-pointer" @click="access.splice(id, 1)"></div>
                         </div>
-                        <p class="text-center mt-3 text-base">Электронная почта Outlook</p>
+                        <div class="pen" @click="acc.isEditing = !acc.isEditing, !acc.text ? access.splice(id, 1) : ''" v-if="!acc.isEditing && user.isAdmin"></div>
+                        <div class="trash" @click="access.splice(id, 1)" v-if="!acc.isEditing && user.isAdmin"></div>
+                        <p class="text-center leading-5 mt-3" v-html="acc.text" v-if="!acc.isEditing"></p>
+                        <input @keypress="changeAccess(id)" class="bg-transparent text-white outline-none text-center opacity-80 mt-[10px]" v-model="acc.text" placeholder="Название доступа..." v-if="acc.isEditing && user.isAdmin">
                     </div>
-                    <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
-                            <img class="w-[7.5rem] h-[7.5rem]" src="../../assets/images/mycent.kz.svg" alt="outlook">
+                </div>
+                <div class="mx-auto w-full" v-if="user.isAdmin">
+                    <div class="flex items-center justify-center h-8 py-14 text-base font-medium text-white rounded-[20px] text-center">
+                        <div @click="access.push({ text: 'new acess', isEditing: false, path: null })" class="bg-[#969696] text-black text-4xl font-bold pb-[0.45rem] w-12 h-12 flex items-center justify-center rounded-full cursor-pointer transition-all hover:bg-white">
+                            +
                         </div>
-                        <p class="text-center mt-3 text-base">Корпоративный портал</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
-                            <img class="w-[4rem] h-[4rem]" src="../../assets/images/wechat.svg" alt="outlook">
-                        </div>
-                        <p class="text-center mt-3 text-base">Общение с коллегами WeChat</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
-                            <img class="w-[4.5rem] h-[4.5rem]" src="../../assets/images/kias.svg" alt="outlook">
-                        </div>
-                        <p class="text-center mt-3 text-base">Все процессы компании</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
-                            <img class="w-12 h-12" src="../../assets/images/telega.svg" alt="outlook">
-                        </div>
-                        <p class="text-center mt-3 text-base">Чат-бот в Telegram</p>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div class="flex items-center justify-center h-32 py-4 text-lg font-medium text-white rounded-[20px] border-2 border-solid border-white w-full">
-                            <img class="w-12 h-12" src="../../assets/images/whatsapp.svg" alt="outlook">
-                        </div>
-                        <p class="text-center mt-3 text-base">Группа в WhatsApp</p>
                     </div>
                 </div>
             </div>
@@ -194,6 +196,15 @@
 <script>
 import Navbar from '../../components/layout/Navbar/Navbar.vue';
 import Footer from '../../components/layout/Footer/Footer.vue';
+
+import adminImage from '../../assets/images/admin.png';
+
+import outlook from '../../assets/images/outlook.svg';
+import mycentkz from '../../assets/images/mycent.kz.svg';
+import wechat from '../../assets/images/wechat.svg';
+import kias from '../../assets/images/kias.svg';
+import telegram from '../../assets/images/telegram.svg';
+import whatsapp from '../../assets/images/whatsapp.svg';
 
 export default {
     data() {
@@ -218,8 +229,83 @@ export default {
                     mail: "",
                     telegram: "",
                     phone: ""
+                },
+                isAdmin: false
+            },
+            files: [
+                {
+                    text: 'Презентация OnBoarding',
+                    isEditing: false
+                },
+                {
+                    text: 'Анкета 1',
+                    isEditing: false
+                },
+                {
+                    text: 'Анкета 2',
+                    isEditing: false
+                },
+                {
+                    text: 'Дорожная карта <br> (SQL разработчик)',
+                    isEditing: false
+                },
+                {
+                    text: 'Дорожная карта <br> (Backend разработчик)',
+                    isEditing: false
+                },
+                {
+                    text: 'Дорожная карта <br> (Fronted разработчик)',
+                    isEditing: false
+                },
+                {
+                    text: 'Дорожная карта <br> (QA)',
+                    isEditing: false
+                },
+                {
+                    text: 'Дорожная карта <br> (QA)',
+                    isEditing: false
+                },
+                {
+                    text: 'Дорожная карта <br> (Scrum мастер)',
+                    isEditing: false
+                },
+                {
+                    text: 'Дорожная карта (дизайнер)',
+                    isEditing: false
                 }
-            }
+            ],
+            access: [
+                {
+                    text: 'Электронная почта Outlook',
+                    isEditing: false,
+                    path: outlook
+                },
+                {
+                    text: 'Корпоративный портал',
+                    isEditing: false,
+                    path: mycentkz
+                },
+                {
+                    text: 'Общение с коллегами WeChat',
+                    isEditing: false,
+                    path: wechat
+                },
+                {
+                    text: 'Все процессы компании',
+                    isEditing: false,
+                    path: kias
+                },
+                {
+                    text: 'Чат-бот в Telegram',
+                    isEditing: false,
+                    path: telegram
+                },
+                {
+                    text: 'Группа в WhatsApp',
+                    isEditing: false,
+                    path: whatsapp
+                },
+            ]
         };
     },
     computed: {
@@ -248,7 +334,7 @@ export default {
                 case "Senior":
                     return {
                         percent: 100,
-                        left: "46.5rem"
+                        left: "47.5rem"
                     };
                 default:
                     return 0;
@@ -258,8 +344,38 @@ export default {
             return `${this.user.personality}`.replaceAll("\n", "<br>");
         }
     },
+    methods: {
+        changeFiles(id) {
+            if(event.key === "Enter") {
+                this.files[id].isEditing = false;
+            }
+        },
+        changeAccess(id) {
+            if(event.key === "Enter") {
+                this.access[id].isEditing = false;
+            }
+        }
+    },
     created() {
         this.user = this.$store.state.user;
+
+        // Для админа
+        this.user.profile_image = adminImage;
+        this.user.name = 'Айгерим';
+        this.user.surname = 'Абилова';
+        this.user.work = 'HR manager';
+        this.user.level = 'Senior';
+        this.user.date_of_birth.day = '24';
+        this.user.date_of_birth.month = '09';
+        this.user.date_of_birth.year = '1989';
+        this.user.employmentTime = 'с 8:00 до 17:00';
+        this.user.softSkills = ['Коммуникабельность','Эмпатия','Критическое мышление'];
+        this.user.hardSkills = ['Набор персонала','Укмплектование штатов','Управление производительносью'];
+        this.user.contacts.mail = 'abilova.aigerim@gmail.com';
+        this.user.contacts.telegram = '@aigerim2409';
+        this.user.contacts.phone = '+7 (777) 777-77-77';
+        this.user.project = this.$store.state.user.project;
+        this.user.isAdmin = true;
     },
     components: { Navbar, Footer }
 }
@@ -267,4 +383,96 @@ export default {
 
 <style lang="scss" scoped>
 @import "./Personal-Info.scss";
+
+.pen {
+    width: 16px;
+    height: 16px;
+
+    background-position: center;
+    background-color: #fff;
+    mask: url('../../assets/images/pen.svg') no-repeat center / contain;
+    opacity: 0.6;
+    transition: all 0.25s ease 0s;
+
+    position: absolute;
+    top: 1rem;
+    right: 2.75rem;
+
+    opacity: 0;
+    visibility: hidden;
+
+    cursor: pointer;
+
+    &:hover{
+        opacity: 1;
+    }
+}
+
+.trash {
+    width: 18px;
+    height: 18px;
+
+    background-position: center;
+    background-color: #fff;
+    mask: url('../../assets/images/trash.svg') no-repeat center / contain;
+    opacity: 0.6;
+    transition: all 0.25s ease 0s;
+
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+
+    opacity: 0;
+    visibility: hidden;
+
+    cursor: pointer;
+
+    &:hover{
+        opacity: 1;
+    }
+}
+
+.access-pen, .access-trash {
+    height: 22px;
+
+    background-position: center;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.access-pen {
+    width: 20px;
+    mask: url('../../assets/images/pen.svg') no-repeat center / contain;
+    margin-right: 0.5rem;
+}
+
+.access-trash {
+    width: 22px;
+    mask: url('../../assets/images/trash.svg') no-repeat center / contain;
+}
+
+.parent:hover {
+    img {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .pen, .trash {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.parent2:hover {
+    .pen, .trash {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    img {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 </style>

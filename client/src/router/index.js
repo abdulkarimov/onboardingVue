@@ -12,6 +12,7 @@ import SurveyPage from '../pages/SurveyPage/SurveyPage.vue'
 import AuthPage from '../pages/AuthPage/AuthPage.vue'
 import Projects from '../pages/Projects/Projects.vue'
 import Project from '../pages/Projects/Project/Project.vue'
+import AdaptationSurvey from '../pages/AdaptationSurvey/AdaptationSurvey.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +27,10 @@ const router = new VueRouter({
     {
       path: '/roadmap',
       component: Roadmap
+    },
+    {
+      path: '/adaptation-survey',
+      component: AdaptationSurvey
     },
     {
       path: '/employees',
